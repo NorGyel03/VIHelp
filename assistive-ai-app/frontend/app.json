@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "Assistive AI",
+    "slug": "assistive-ai-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "assistiveaiapp",
+    "userInterfaceStyle": "automatic",
+
+    "icon": "./assets/images/icon.jpg",
+
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+
+    "assetBundlePatterns": ["**/*"],
+
+    "android": {
+      "package": "com.assistiveai.app",
+      "versionCode": 1,
+
+      "permissions": [
+        "BLUETOOTH",
+        "BLUETOOTH_ADMIN",
+        "BLUETOOTH_CONNECT",
+        "BLUETOOTH_SCAN",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "INTERNET",
+        "RECORD_AUDIO"
+      ],
+
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.jpg",
+        "backgroundColor": "#000000"
+      }
+    },
+
+    "ios": {
+      "bundleIdentifier": "com.assistiveai.app",
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSBluetoothAlwaysUsageDescription": "Used to connect to assistive device",
+        "NSMicrophoneUsageDescription": "Used for voice commands",
+        "NSCameraUsageDescription": "Used for capturing images"
+      }
+    },
+
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 35,
+            "targetSdkVersion": 35,
+            "minSdkVersion": 24
+          }
+        }
+      ]
+    ],
+
+    "extra": {
+      "apiUrl": "https://your-backend.com"
+    }
+  }
+}
