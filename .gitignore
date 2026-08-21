@@ -35,3 +35,7 @@ Thumbs.db
 # Python cache
 .pytest_cache/
 assistive-ai-app - WIFI/
+
+.idea/
+.claude/
+**/debug.keystore
