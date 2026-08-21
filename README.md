@@ -1,45 +1,71 @@
-VIHelp WiFi Setup — Daily Procedure
-Step 1 — Turn on Android Hotspot
-Hotspot name: ESPTest
-Password: 12345678
-Band: 2.4 GHz
-Step 2 — Check PC IP
-Open PowerShell and run:
+# VIHelp 🦯
 
-ipconfig | findstr "10."
-Note the IP (e.g. 10.108.117.252)
+### AI-Powered Assistive Wearable for the Visually Impaired
 
-Step 3 — Update frontend/.env if IP changed
-EXPO_PUBLIC_API_URL=http://<PC_IP>:3000
-EXPO_PUBLIC_AI_SERVICE_URL=http://<PC_IP>:5000
-Step 4 — Update firmware if IP changed
-Open firmware/esp32s3_devkit_ov3660_wifi/esp32s3_devkit_ov3660_wifi.ino line 56:
+VIHelp is an AI-powered assistive system designed to help visually impaired users
+understand their surroundings through real-time computer vision, object detection,
+depth estimation, and audio feedback.
 
-const char* UPLOAD_URL = "http://<PC_IP>:5000/upload";
-Then reflash via Arduino IDE.
+The system combines an ESP32-based camera device with an AI inference service,
+backend infrastructure, and a mobile application.
 
-Step 5 — Start backend (Terminal 1)
-cd "C:\Users\Asus\OneDrive\Desktop\VIHelp\app\assistive-ai-app - WIFI\backend"
-npm start
-✅ Should say: Server running on port 3000
+---
 
-Step 6 — Start AI service (Terminal 2)
-cd "C:\Users\Asus\OneDrive\Desktop\VIHelp\app\assistive-ai-app - WIFI\ai-service"
-C:\Users\Asus\anaconda3\python.exe app.py
-✅ Should say: Running on http://<PC_IP>:5000
+## 🎯 Problem
 
-Step 7 — Start frontend (Terminal 3)
-cd "C:\Users\Asus\OneDrive\Desktop\VIHelp\app\assistive-ai-app - WIFI\frontend"
-npx expo start --clear
-✅ Scan QR code with Expo Go
+Visually impaired users often have difficulty identifying objects, obstacles,
+and spatial information in unfamiliar environments.
 
-Step 8 — Power ESP32
-Plug into backup charger. In Serial Monitor you should see:
+VIHelp aims to provide an affordable assistive solution that can detect
+surrounding objects and communicate useful environmental information through
+audio feedback.
 
-[WIFI] Connected  IP: 10.x.x.128
-[PUSH] Will POST frames to: http://<PC_IP>:5000/upload
-What to update if IP changes
-What	Where
-frontend/.env	Both lines — keep :3000 and :5000
-Firmware UPLOAD_URL	Line 56 of .ino → reflash
-ai-service/.env	Not needed anymore
+---
+
+## 💡 Solution
+
+VIHelp connects four major components:
+
+**Camera Device → AI Processing → Backend → Mobile Application**
+
+The camera captures the user's surroundings, the AI service processes the
+visual information, and the resulting detections can be accessed through the
+application.
+
+---
+
+## 🏗️ System Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │     ESP32 Camera    │
+                    │                     │
+                    │  Image Acquisition  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │    AI Inference     │
+                    │                     │
+                    │ YOLO Object Detect. │
+                    │ Depth Estimation    │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │    Backend API      │
+                    │                     │
+                    │ Authentication      │
+                    │ Devices             │
+                    │ Detections          │
+                    │ User Management     │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │    Mobile App       │
+                    │                     │
+                    │ Detection Display   │
+                    │ Audio Feedback      │
+                    │ Device Management   │
+                    └─────────────────────┘
